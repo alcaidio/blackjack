@@ -1,0 +1,16 @@
+{
+  "name": "blackjack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+  "build": "npx tsc",
+  "start": "npx serve"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  }
+}
