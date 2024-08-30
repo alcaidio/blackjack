@@ -10,7 +10,7 @@ type EventType = 'begin' | 'draw' | 'move' | 'end' | 'result' | 'double' | 'stan
 // Represents a single event in the game
 interface GameEvent {
     eventType: EventType; // Renamed from 'type'
-    card: Card;    // Card drawn, applicable if eventType is 'draw' or 'double'
+    card?: Card;    // Card drawn, applicable if eventType is 'draw' or 'double'
     score?: number; // Score after the event
     isSoft?: boolean; // Whether the score is soft
     status?: string; // Status message

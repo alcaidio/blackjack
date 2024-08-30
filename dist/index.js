@@ -31,7 +31,7 @@ function calculateRemainingDecks(cardsPlayed) {
 }
 let cardsPlayed = 0;
 function updateState(state) {
-    const cards = (state.events || []).map((e) => e === null || e === void 0 ? void 0 : e.card);
+    const cards = (state.events || []).filter(e => !!(e === null || e === void 0 ? void 0 : e.card)).map((e) => e.card);
     cardsPlayed += cards.length;
     const RC = calculateRunningCount(cards);
     const remainingDecks = calculateRemainingDecks(cardsPlayed);
@@ -45,10 +45,12 @@ function interceptXHR() {
         if (url.includes("/gambling/play")) {
             this.addEventListener("load", function () {
                 const state = JSON.parse(this.responseText);
+                console.log('state', state);
                 updateState(state);
             });
         }
         originalXHR.apply(this, [method, url, async, user, password]);
     };
 }
+console.log('Start playing!');
 interceptXHR();

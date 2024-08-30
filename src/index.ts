@@ -40,7 +40,7 @@ function calculateRemainingDecks(cardsPlayed: number): number {
 let cardsPlayed = 0
 
 function updateState(state: BlackjackState) {
-    const cards: Card[] = (state.events || []).map((e) => e?.card);
+    const cards: Card[] = (state.events || []).filter(e => !!e?.card).map((e) => e.card) as Card[]
     cardsPlayed += cards.length
 
     const RC = calculateRunningCount(cards);
@@ -65,6 +65,8 @@ function interceptXHR() {
       this.addEventListener("load", function () {
         const state: BlackjackState = JSON.parse(this.responseText);
 
+        console.log('state', state);
+        
         updateState(state);
       });
     }
@@ -72,5 +74,7 @@ function interceptXHR() {
     originalXHR.apply(this, [method, url, async, user, password]);
   };
 }
+
+console.log('Start playing!');
 
 interceptXHR();
